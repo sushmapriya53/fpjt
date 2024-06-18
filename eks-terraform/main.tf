@@ -160,7 +160,7 @@ data "aws_security_group" "selected" {
     ]
   }
  resource "aws_eks_node_group" "node-grp" {
-    cluster_name    = project-eks.eks.name
+    cluster_name    = aws_eks_cluster.eks.name
     node_group_name = "node-group1"
     node_role_arn   = aws_iam_role.worker.arn
     subnet_ids      = [data.aws_subnet.subnet-1.id, data.aws_subnet.subnet-2.id]
