@@ -33,12 +33,7 @@ provider "aws" {
   resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
     policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
     role       = aws_iam_role.master.name
-  }
-
-  resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
-    policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-    role       = aws_iam_role.master.name
-  }
+}
 
   resource "aws_iam_role" "worker" {
     name = "sushma-eks-worker"
