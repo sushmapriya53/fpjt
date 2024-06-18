@@ -35,7 +35,12 @@ provider "aws" {
     role       = aws_iam_role.master.name
 }
 
-  resource "aws_iam_role" "worker" {
+resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAmazonEKSNodegroup" {
+    policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AWSServiceRoleForAmazonEKSNodegroup"
+    role       = aws_iam_role.master.name
+}
+
+ resource "aws_iam_role" "worker" {
     name = "sushma-eks-worker"
 
     assume_role_policy = jsonencode({
@@ -157,6 +162,7 @@ data "aws_security_group" "selected" {
       aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,
       aws_iam_role_policy_attachment.AmazonEKSServicePolicy,
       aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
+      aws_iam_role_policy_attachment.AWSServiceRoleForAmazonEKSNodegroup,
     ]
   }
  resource "aws_eks_node_group" "node-grp" {
